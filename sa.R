@@ -34,19 +34,50 @@ for(x in 1:length(v_text)){
 # 轉換列數與段落文字，成為 dataframe 物件
 text_df <- data_frame(doc_id = v_docId, text = v_text)
 
+text_df
+
 # 將原先的句子拆成單詞
 tidy_script <- text_df %>% 
   unnest_tokens(word, text)
 
-# 調用加拿大國家研究委員會的情緒詞典(每個文件中的每個字，各代表的情感為何)
+tidy_script
+
+# [調用加拿大國家研究委員會的情緒詞典]
+# 每個文件中的每個字，各代表的情感為何
 tidy_script %>% 
   inner_join(get_sentiments("nrc")) %>% 
   arrange(doc_id) %>% 
-  head(10)
+  head(100)
 
-# 調用加拿大國家研究委員會的情緒詞典(每個文件中，各種情感的數量為何)
+# [調用加拿大國家研究委員會的情緒詞典]
+# 每個文件中，各種情感的數量為何
 tidy_script %>% 
   inner_join(get_sentiments("nrc")) %>% 
   count(doc_id, sentiment) %>% 
   arrange(doc_id) %>% 
-  head(10)
+  head(100)
+
+# [調用加拿大國家研究委員會的情緒詞典]
+# 用index區分，分成段落，%/% 代表整除符號，
+# 這樣 0-4 行成了第一段落，5-9行成為第二段落
+tidy_script %>% 
+  inner_join(get_sentiments("nrc")) %>% 
+  count(doc_id, sentiment) %>% 
+  mutate(index = doc_id %/% 5) %>% 
+  arrange(index) %>% 
+  head(100)
+
+# 繪製圖片
+tidy_script %>% 
+  inner_join(get_sentiments("nrc")) %>% 
+  count(doc_id, sentiment) %>% 
+  mutate(index = doc_id %/% 5) %>% 
+  ggplot(aes(x=index, y=n, color=sentiment)) %>% + geom_col()
+
+# 繪製圖片
+tidy_script %>% 
+  inner_join(get_sentiments("nrc")) %>% 
+  count(doc_id, sentiment) %>% 
+  mutate(index = doc_id %/% 5) %>% 
+  ggplot(aes(x=index, y=n, color=sentiment)) %>% + geom_col() %>% 
+  + facet_wrap(~sentiment, ncol=3)

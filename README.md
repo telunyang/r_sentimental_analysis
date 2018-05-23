@@ -6,13 +6,18 @@
 
 ## 安裝套件
 install.packages("rvest")
+
 install.packages("dplyr")
+
 install.packages("tidytext")
+
 install.packages("tidyr")
+
 install.packages("ggplot2")
 
+
 ## 輸出範例
-![範例圖片](https://github.com/telunyang/R-Sentiment-Analysis/blob/master/Rplot.png)
+![範例圖片]https://raw.githubusercontent.com/telunyang/R-Sentimental-Analysis/master/Rplot.png)
 
 ## 基礎程式碼
 ```

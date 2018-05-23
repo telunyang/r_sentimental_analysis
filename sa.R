@@ -5,7 +5,7 @@ library(tidyr)
 library(ggplot2)
 
 # 欲抓取的網址
-url <- "http://money.cnn.com/2018/05/21/media/royal-wedding-ratings/index.html"
+url <- "http://money.cnn.com/2018/05/21/media/barack-michelle-obama-netflix-deal/index.html"
 
 # 建立空字串
 str_text <- as.character()

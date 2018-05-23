@@ -17,7 +17,7 @@ install.packages("ggplot2")
 
 
 ## 輸出範例
-![範例圖片]https://raw.githubusercontent.com/telunyang/R-Sentimental-Analysis/master/Rplot.png)
+![範例圖片](https://raw.githubusercontent.com/telunyang/R-Sentimental-Analysis/master/Rplot.png)
 
 ## 基礎程式碼
 ```

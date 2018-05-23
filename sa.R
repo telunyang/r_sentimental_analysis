@@ -4,8 +4,17 @@ library(tidytext)
 library(tidyr)
 library(ggplot2)
 
+args = commandArgs(trailingOnly=TRUE)
+
+if (length(args)==0) {
+  stop("Please type: Rscript sa.R [your-url]", call.=FALSE)
+} else if (length(args)==1) {
+  # default output file
+  post_url = args[2]
+}
+
 # 欲抓取的網址
-url <- "http://money.cnn.com/2018/05/21/media/barack-michelle-obama-netflix-deal/index.html"
+url <- post_url
 
 # 建立空字串
 str_text <- as.character()
@@ -81,3 +90,7 @@ tidy_script %>%
   mutate(index = doc_id %/% 5) %>% 
   ggplot(aes(x=index, y=n, color=sentiment)) %>% + geom_col() %>% 
   + facet_wrap(~sentiment, ncol=3)
+
+ggsave("Rplot.png")
+
+print("Rplot.png")
